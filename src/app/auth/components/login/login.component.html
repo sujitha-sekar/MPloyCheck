@@ -1,0 +1,23 @@
+<div class="outer-container login-bg">
+  <div class="background-object object-1"></div>
+  <div class="background-object object-2"></div>
+  <div class="background-object object-3"></div>
+  <div class="login-card">
+    <img src="/assets/logo.webp" alt="MPloyCheck Logo" class="logo" />
+    <p class="subtext">Please enter your login details</p>
+    <div class="role-tabs">
+      <div #tab class="tab" [class.active]="selectedRole === 'General User'" (click)="selectRole('General User')">
+        General User
+      </div>
+      <div #tab class="tab" [class.active]="selectedRole === 'Admin'" (click)="selectRole('Admin')">
+        Admin
+      </div>
+      <div class="underline" [style.width]="underlineWidth" [style.left]="underlineLeft"></div>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input id="username" type="text" formControlName="id" class="input-field" placeholder="Username" />
+      <input id="password" type="password" formControlName="password" class="input-field" placeholder="Password" />
+      <button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
+    </form>
+  </div>
+</div>

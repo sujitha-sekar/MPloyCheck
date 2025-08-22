@@ -1,0 +1,13 @@
+export interface User {
+  id: string;
+  name: string;
+  password?: string; // Optional, not needed in frontend
+  role: 'General User' | 'Admin';
+  records: Record[];
+}
+
+export interface Record {
+  recordId: string;
+  title: string;
+  status: 'Completed' | 'Pending';
+}

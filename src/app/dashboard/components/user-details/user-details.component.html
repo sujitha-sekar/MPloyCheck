@@ -1,0 +1,32 @@
+<div>
+  @if (user) {
+  <div class="card">
+    <h2>Welcome, {{ user.name }} ⚡</h2>
+    <p><strong>Role:</strong> {{ user.role }} </p>
+    <p><strong>User ID:</strong> {{ user.name }} </p>
+  </div>
+  @if(records && records.length) {
+  <div class="card">
+    <h2>My Records</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Record ID</th>
+          <th>Title</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (record of records; track record.recordId) {
+        <tr>
+          <td>{{ record.recordId }}</td>
+          <td>{{ record.title }}</td>
+          <td>{{ record.status }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+  }
+</div>

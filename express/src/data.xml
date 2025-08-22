@@ -1,0 +1,84 @@
+<database>
+  <users>
+    <user>
+      <id>u101</id>
+      <name>John Doe</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>My first record</title>
+          <status>Completed</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>My second record</title>
+          <status>Pending</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>u102</id>
+      <name>Alice</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R002</recordId>
+          <title>Alice Record</title>
+          <status>Pending</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>a201</id>
+      <name>Suji</name>
+      <password>suji</password>
+      <role>Admin</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>My Record One</title>
+          <status>Completed</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>My Record Two</title>
+          <status>completed</status>
+        </record>
+        <record>
+          <recordId>R003</recordId>
+          <title>My Record Three</title>
+          <status>Yet to start</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>a202</id>
+      <name>Sam</name>
+      <password>sam2</password>
+      <role>Admin</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>My Record One</title>
+          <status>Pending</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>My Record Two</title>
+          <status>Yet to Start</status>
+        </record><record>
+          <recordId>R003</recordId>
+          <title>My Record Three</title>
+          <status>Completed</status>
+        </record><record>
+          <recordId>R004</recordId>
+          <title>My Record Fout</title>
+          <status>Completed</status>
+        </record>
+      </records>
+    </user>
+  </users>
+</database>
