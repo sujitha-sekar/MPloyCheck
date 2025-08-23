@@ -11,5 +11,9 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
   styleUrl: './dialog.component.scss'
 })
 export class DialogComponent {
-constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  /**
+   * Component constructor which is used to inject the required services.
+   * @param data hold the message that need to display in dialog
+   */
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 }

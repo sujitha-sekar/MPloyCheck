@@ -15,19 +15,24 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './records-table.component.scss'
 })
 export class RecordsTableComponent {
-constructor(
+  /**
+   * Constructor which is used to inject the required services.
+   * @param dialogRef to access the methods.
+   * @param data hold the dialog data.
+   */
+  constructor(
     public dialogRef: MatDialogRef<RecordsTableComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { action: 'View' | 'Edit'; user: User }
-  ) {}
-
+  ) { }
+  /**
+   * Method user to save the user details.
+   */
   saveChanges() {
     this.dialogRef.close(this.data.user);
   }
-
-  cancel() {
-    this.dialogRef.close();
-  }
-
+  /**
+   * Method used to close the dialog.
+   */
   close() {
     this.dialogRef.close();
   }

@@ -1,7 +1,7 @@
 export interface User {
   id: string;
   name: string;
-  password?: string; // Optional, not needed in frontend
+  password?: string;
   role: 'General User' | 'Admin';
   records: Record[];
 }

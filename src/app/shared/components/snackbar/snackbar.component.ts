@@ -11,9 +11,10 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar'
   styleUrl: './snackbar.component.scss'
 })
 export class SnackbarComponent {
-constructor(public snackBarRef: MatSnackBarRef<SnackbarComponent>, @Inject(MAT_SNACK_BAR_DATA) public data: any,) { }
-  
-  onclose() {
-    this.snackBarRef.dismiss();
-  }
+  /**
+   * Component constructor which is used to inject the required services.
+   * @param snackBarRef hold the ref for snack bar.
+   * @param data hold the data that need to display in snack bar.
+   */
+  constructor(public snackBarRef: MatSnackBarRef<SnackbarComponent>, @Inject(MAT_SNACK_BAR_DATA) public data: any,) { }
 }

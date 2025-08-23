@@ -8,6 +8,7 @@ import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { DialogService } from '../../../shared/services/dialog.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RecordsTableComponent } from '../records-table/records-table.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-management',
@@ -17,11 +18,36 @@ import { RecordsTableComponent } from '../records-table/records-table.component'
   styleUrl: './user-management.component.scss'
 })
 export class UserManagementComponent {
+  /**
+   * Varibale which hold the delay time.
+   */
   delayMs = 2000;
+  /**
+   * Variable which hold the current user details.
+   */
   currentUser: User | null = null;
+  /**
+   * Variable which hold the all user list.
+   */
   allUsers: User[] = [];
+  /**
+   * Variable which hold the filtered user list.
+   */
   filteredUsers: User[] = [];
-
+  /**
+   * Variable which is used to subscribe and unsubscribe the subscriptions.
+   * @type {Subscription}
+   */
+  subscriptionObj: Subscription = new Subscription();
+  /**
+   * Component constructor which is used to inject the required services.
+   * @param userService to get the user details.
+   * @param ngxService to get the loader.
+   * @param snackbarService to display the snack bar.
+   * @param dialogService to access the method inside it.
+   * @param dialog to display the dialog.
+   * @param router used to navigate. 
+   */
   constructor(
     private userService: UserService,
     private ngxService: NgxUiLoaderService,
@@ -29,16 +55,20 @@ export class UserManagementComponent {
     private dialogService: DialogService,
     private dialog: MatDialog,
     private router: Router) { }
-
+  /**
+   * Angular Life cycle hooks that initiate component
+   */
   ngOnInit() {
     this.ngxService.start();
     const storedUser = localStorage.getItem('currentUser');
     this.currentUser = storedUser ? JSON.parse(storedUser) : null;
     this.loadAllUsers();
   }
-
+  /**
+   * Method which is used to load all the users.
+   */
   loadAllUsers() {
-    this.userService.getAllUsers(this.delayMs).subscribe({
+    this.subscriptionObj.add(this.userService.getAllUsers(this.delayMs).subscribe({
       next: (data) => {
         this.allUsers = data;
         this.filteredUsers = this.allUsers.filter(u => u.role === 'General User');
@@ -48,14 +78,16 @@ export class UserManagementComponent {
         console.error('Error loading all users:', err);
         this.ngxService.stop();
       }
-    });
+    }));
   }
-
+  /**
+   * Method which is used to view the user details.
+   * @param data hold the user data.
+   */
   viewUser(data: User) {
-    console.log('data', data)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '550px';
-    this.userService.getUserDetails(data.id).subscribe({
+    this.subscriptionObj.add(this.userService.getUserDetails(data.id).subscribe({
       next: (latestUser: GetRecordResponse) => {
         dialogConfig.data = {
           action: 'View',
@@ -66,12 +98,15 @@ export class UserManagementComponent {
       error: () => {
         this.snackbarService.openSnackbar('Failed to load user details', 'Error');
       }
-    });
+    }));
   }
-
+  /**
+   * Method which is used to delete the user.
+   * @param userId hold the user id.
+   */
   deleteUser(userId: string) {
     const dialogRef = this.dialogService.openConfirmationDialog('Are you sure you want to delete this customer', 'custome-dialog');
-    dialogRef.afterClosed().subscribe((result: boolean) => {
+    this.subscriptionObj.add(dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.ngxService.start();
         this.userService.deleteUser(userId).subscribe({
@@ -94,13 +129,16 @@ export class UserManagementComponent {
           }
         });
       }
-    });
+    }));
   }
-
+  /**
+   * Method which is used to edit the user details.
+   * @param user hold the user details.
+   */
   editUser(user: User) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '550px';
-    this.userService.getUserDetails(user.id).subscribe({
+    this.subscriptionObj.add(this.userService.getUserDetails(user.id).subscribe({
       next: (latestUser: GetRecordResponse) => {
         if (latestUser.success && latestUser.user) {
           dialogConfig.data = {
@@ -137,6 +175,12 @@ export class UserManagementComponent {
         console.error('Error fetching user details for editing:', err);
         this.snackbarService.openSnackbar('Failed to load user details for editing', 'Error');
       }
-    });
+    }));
+  };
+  /**
+   * A lifecycle hook to unsubscribe all details
+   */
+  ngOnDestory() {
+    if (this.subscriptionObj) this.subscriptionObj.unsubscribe();
   }
 }
