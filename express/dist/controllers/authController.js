@@ -112,14 +112,15 @@ const login = (req, res) => {
 };
 exports.login = login;
 const getUserDetails = (req, res) => {
-    const userId = req.query.id || 'u101';
+    const userId = req.query.id || '';
     const user = users.find(u => u.id === userId);
     if (user) {
         const response = { success: true, user, message: 'Get user details successful' };
         res.json(response);
     }
-    else
+    else {
         res.status(404).json({ success: false, user: null, message: 'User not found' });
+    }
 };
 exports.getUserDetails = getUserDetails;
 const getRecords = (req, res) => {
@@ -154,8 +155,11 @@ const updateUser = (req, res) => {
     if (index !== -1) {
         users[index] = updatedUser;
         saveData();
+        res.json({ success: true, message: 'User updated successfully', user: updatedUser });
     }
-    res.json(updatedUser);
+    else {
+        res.status(404).json({ success: false, message: 'User not found' });
+    }
 };
 exports.updateUser = updateUser;
 const deleteUser = (req, res) => {
@@ -164,7 +168,10 @@ const deleteUser = (req, res) => {
     if (index !== -1) {
         users.splice(index, 1);
         saveData();
+        res.json({ success: true, message: 'User deleted successfully' });
     }
-    res.sendStatus(204);
+    else {
+        res.status(404).json({ success: false, message: 'User not found' });
+    }
 };
 exports.deleteUser = deleteUser;

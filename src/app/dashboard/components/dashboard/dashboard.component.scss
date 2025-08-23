@@ -22,13 +22,10 @@ body {
   flex-direction: column;
 }
 
-.sidebar h2 {
-  margin: 0 0 30px;
-  font-size: 20px;
-  text-align: center;
-  color: #fff;
+.logo {
+  width: 185px;
+  margin: 20px auto 30px 15px;
 }
-
 .sidebar a {
   color: #d1d5db;
   text-decoration: none;
@@ -37,9 +34,8 @@ body {
   display: block;
   margin-bottom: 10px;
   transition: 0.3s;
+  cursor: pointer;
 }
-
-.sidebar a:hover,
 .sidebar a.active {
   background: #1f2937;
   color: #fff;

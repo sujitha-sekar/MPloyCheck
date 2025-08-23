@@ -1,5 +1,5 @@
 <div>
-  @if(allUsers && allUsers.length) {
+  @if(filteredUsers && filteredUsers.length) {
   <div class="card">
     <h2>User Management</h2>
     <table>
@@ -8,16 +8,16 @@
           <th>User ID</th>
           <th>Name</th>
           <th>Role</th>
-          <th>Actions</th>
+          <th *ngIf="currentUser?.role === 'Admin'">Actions</th>
         </tr>
       </thead>
       <tbody>
-        @for (user of allUsers; track user.id) {
+        @for (user of filteredUsers; track user.id) {
         <tr>
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.role }}</td>
-          <td class="actions">
+          <td class="actions" *ngIf="currentUser?.role === 'Admin'">
             <button class="view" (click)="viewUser(user)">View</button>
             <button class="edit" (click)="editUser(user)">Edit</button>
             <button class="delete" (click)="deleteUser(user.id)">Delete</button>

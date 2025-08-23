@@ -9,8 +9,22 @@ import { User, Record, GetRecordResponse } from '../models/user.model';
 export class UserService {
   constructor(private http: HttpRoutingService) {}
 
-  getUserDetails(): Observable<User> {
-    return this.http.getMethod<User>('user-details');
+  private currentUser: any;
+
+  setCurrentUser(user: any) {
+    this.currentUser = user;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  getCurrentUser() {
+    if (!this.currentUser) {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    }
+    return this.currentUser;
+  }
+  
+  getUserDetails(userId: string): Observable<GetRecordResponse> {
+    return this.http.getMethod<GetRecordResponse>(`user-details?id=${userId}`);
   }
 
   getRecords(userId: string, delayMs: number = 0): Observable<GetRecordResponse> {

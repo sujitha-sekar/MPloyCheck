@@ -1,19 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Record } from '../../models/user.model';
+import { Record, User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-records-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, MatIconModule, MatButtonModule],
   templateUrl: './records-table.component.html',
   styleUrl: './records-table.component.scss'
 })
 export class RecordsTableComponent {
-records: Record[] = [];
+constructor(
+    public dialogRef: MatDialogRef<RecordsTableComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { action: 'View' | 'Edit'; user: User }
+  ) {}
 
-  constructor(private userService: UserService) {
-    // this.userService.getRecords(history.state.user?.role || 'General User').subscribe(data => this.records = data);
+  saveChanges() {
+    this.dialogRef.close(this.data.user);
+  }
+
+  cancel() {
+    this.dialogRef.close();
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

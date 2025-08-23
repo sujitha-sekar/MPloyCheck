@@ -81,13 +81,14 @@ export const login = (req: Request, res: Response) => {
 };
 
 export const getUserDetails = (req: Request, res: Response) => {
-  const userId = req.query.id as string || 'u101';
+  const userId = req.query.id as string || '';
   const user = users.find(u => u.id === userId);
-   if (user) {
+  if (user) {
     const response: LoginResponse = { success: true, user, message: 'Get user details successful' };
     res.json(response);
-  } 
-  else res.status(404).json({ success: false, user: null, message: 'User not found' });
+  } else {
+    res.status(404).json({ success: false, user: null, message: 'User not found' });
+  }
 };
 
 export const getRecords = (req: Request, res: Response) => {
@@ -121,8 +122,10 @@ export const updateUser = (req: Request, res: Response) => {
   if (index !== -1) {
     users[index] = updatedUser;
     saveData();
+    res.json({ success: true, message: 'User updated successfully', user: updatedUser });
+  } else {
+    res.status(404).json({ success: false, message: 'User not found' });
   }
-  res.json(updatedUser);
 };
 
 export const deleteUser = (req: Request, res: Response) => {
@@ -131,6 +134,8 @@ export const deleteUser = (req: Request, res: Response) => {
   if (index !== -1) {
     users.splice(index, 1);
     saveData();
+    res.json({ success: true, message: 'User deleted successfully' });
+  } else {
+    res.status(404).json({ success: false, message: 'User not found' });
   }
-  res.sendStatus(204);
 };

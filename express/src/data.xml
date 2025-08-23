@@ -1,32 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <database>
   <users>
     <user>
       <id>user1</id>
-      <name>John Doe</name>
+      <name>John</name>
       <password>pass1</password>
       <role>General User</role>
       <records>
         <record>
           <recordId>R001</recordId>
-          <title>My first record</title>
+          <title>John first record</title>
           <status>Completed</status>
         </record>
         <record>
           <recordId>R002</recordId>
-          <title>My second record</title>
-          <status>Pending</status>
+          <title>John second record</title>
+          <status>Completed</status>
         </record>
       </records>
     </user>
     <user>
       <id>user2</id>
-      <name>Alice</name>
+      <name>Tamil</name>
       <password>pass1</password>
       <role>General User</role>
       <records>
         <record>
+          <recordId>R001</recordId>
+          <title>Tamil Record One</title>
+          <status>Completed</status>
+        </record>
+        <record>
           <recordId>R002</recordId>
-          <title>Alice Record</title>
+          <title>Tamil Record Two</title>
           <status>Pending</status>
         </record>
       </records>
@@ -39,12 +45,12 @@
       <records>
         <record>
           <recordId>R001</recordId>
-          <title>Alice Record One</title>
+          <title>Jeni Record One</title>
           <status>Completed</status>
         </record>
         <record>
           <recordId>R002</recordId>
-          <title>Alice Record Two</title>
+          <title>Jeni Record Two</title>
           <status>Completed</status>
         </record>
       </records>
@@ -57,18 +63,18 @@
       <records>
         <record>
           <recordId>R001</recordId>
-          <title>My Record One</title>
+          <title>Suji Record One</title>
           <status>Completed</status>
         </record>
         <record>
           <recordId>R002</recordId>
-          <title>My Record Two</title>
-          <status>completed</status>
+          <title>Suji Record Two</title>
+          <status>Completed</status>
         </record>
         <record>
           <recordId>R003</recordId>
-          <title>My Record Three</title>
-          <status>Pending</status>
+          <title>Suji Record Three</title>
+          <status>Completed</status>
         </record>
       </records>
     </user>
@@ -80,20 +86,22 @@
       <records>
         <record>
           <recordId>R001</recordId>
-          <title>My Record One</title>
+          <title>Sam Record One</title>
           <status>Pending</status>
         </record>
         <record>
           <recordId>R002</recordId>
-          <title>My Record Two</title>
+          <title>Sam Record Two</title>
           <status>Yet to Start</status>
-        </record><record>
+        </record>
+        <record>
           <recordId>R003</recordId>
-          <title>My Record Three</title>
+          <title>Sam Record Three</title>
           <status>Completed</status>
-        </record><record>
+        </record>
+        <record>
           <recordId>R004</recordId>
-          <title>My Record Fout</title>
+          <title>Sam Record Fout</title>
           <status>Completed</status>
         </record>
       </records>

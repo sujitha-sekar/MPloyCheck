@@ -9,7 +9,7 @@ export interface User {
 export interface Record {
   recordId: string;
   title: string;
-  status: 'Completed' | 'Pending';
+  status: 'Completed' | 'Pending' | 'Yet To Start';
 }
 
 export interface GetRecordResponse {

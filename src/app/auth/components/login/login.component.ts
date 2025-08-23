@@ -6,6 +6,7 @@ import { QueryList, ViewChildren, ElementRef } from '@angular/core';
 import { LoginInput } from '../../models/login.model';
 import { SnackbarService } from '../../../shared/services/snackbar.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { UserService } from '../../../dashboard/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private snackbarService: SnackbarService,
-    private ngxService: NgxUiLoaderService
+    private ngxService: NgxUiLoaderService,
+    private userService: UserService
   ) {  }
 
   ngOnInit() {
@@ -69,21 +71,16 @@ export class LoginComponent {
         role: this.selectedRole
       };
       this.authService.login(inputData).subscribe({
-        next: (response) => {
-          if (response?.success) {
-            this.ngxService.stop();
-            this.snackbarService.openSnackbar('LogedIn Successfully', 'Success');
-            localStorage.setItem('user', JSON.stringify(response.user));
-            this.router.navigate(['/dashboard/user-details'], { state: { user: response.user } });
-          } else {
-            this.ngxService.stop();
-            // alert('Invalid Credentials');
-            this.snackbarService.openSnackbar('Invalid Credentials', 'Warning');
-          }
-        },
+      next: (response) => {
+        if (response?.success) {
+          this.userService.setCurrentUser(response.user);
+          this.router.navigate(['/dashboard/user-details']);
+        } else {
+          alert('Invalid credentials');
+        }
+      },
         error: () => { 
           this.ngxService.stop(); 
-          // alert('Login failed'); 
           this.snackbarService.openSnackbar('Faild to Login', 'Error') }
       });
     }

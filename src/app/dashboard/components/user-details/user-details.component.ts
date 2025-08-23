@@ -24,7 +24,7 @@ export class UserDetailsComponent {
 
   ngOnInit() {
     this.ngxService.start();
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem('currentUser');
     this.user = storedUser ? JSON.parse(storedUser) : null;
     this.loadRecords();
   }

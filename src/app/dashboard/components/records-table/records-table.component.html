@@ -1,8 +1,48 @@
-<!-- <table>
-      <thead><tr><th>ID</th><th>Title</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr *ngFor="let record of records">
-          <td>{{ record.id }}</td><td>{{ record.title }}</td><td>{{ record.description }}</td>
-        </tr>
-      </tbody>
-    </table> -->
+<div class="dialog-container">
+      <div class="dialog-header">
+        <h2 class="dialog-title">{{ data.action }} User Records</h2>
+        <span class="close-icon" (click)="close()">&times;</span>
+      </div>
+      <div class="dialog-content">
+        <div class="user-details">
+          <p><strong>ID:</strong> {{ data.user.id }}</p>
+          <p><strong>Name:</strong> {{ data.user.name }}</p>
+          <p><strong>Role:</strong> {{ data.user.role }}</p>
+        </div>
+        <h3 class="records-title">Records</h3>
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>Record ID</th>
+              <th>Title</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (record of data.user.records; track record.recordId; let i = $index) {
+              <tr>
+                <td>{{ record.recordId }}</td>
+                <td>{{ record.title }}</td>
+                <td>
+                  @if (data.action === 'Edit') {
+                    <select [(ngModel)]="data.user.records[i].status">
+                      <option value="Completed">Completed</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Yet To Start">Yet To Start</option>
+                    </select>
+                  } @else {
+                    {{ record.status }}
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      @if (data.action === 'Edit') {
+        <div class="dialog-actions">
+          <button class="btn save-btn" (click)="saveChanges()">Save</button>
+          <button class="btn cancel-btn" (click)="cancel()">Cancel</button>
+        </div>
+      }
+    </div>
