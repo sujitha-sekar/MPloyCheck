@@ -1,7 +1,7 @@
 <database>
   <users>
     <user>
-      <id>u101</id>
+      <id>user1</id>
       <name>John Doe</name>
       <password>pass1</password>
       <role>General User</role>
@@ -19,7 +19,7 @@
       </records>
     </user>
     <user>
-      <id>u102</id>
+      <id>user2</id>
       <name>Alice</name>
       <password>pass1</password>
       <role>General User</role>
@@ -32,9 +32,27 @@
       </records>
     </user>
     <user>
-      <id>a201</id>
+      <id>user3</id>
+      <name>Jeni</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>Alice Record One</title>
+          <status>Completed</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>Alice Record Two</title>
+          <status>Completed</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>admin1</id>
       <name>Suji</name>
-      <password>suji</password>
+      <password>pass1</password>
       <role>Admin</role>
       <records>
         <record>
@@ -50,15 +68,15 @@
         <record>
           <recordId>R003</recordId>
           <title>My Record Three</title>
-          <status>Yet to start</status>
+          <status>Pending</status>
         </record>
       </records>
     </user>
     <user>
-      <id>a202</id>
+      <id>user4</id>
       <name>Sam</name>
-      <password>sam2</password>
-      <role>Admin</role>
+      <password>pass1</password>
+      <role>General User</role>
       <records>
         <record>
           <recordId>R001</recordId>

@@ -114,10 +114,12 @@ exports.login = login;
 const getUserDetails = (req, res) => {
     const userId = req.query.id || 'u101';
     const user = users.find(u => u.id === userId);
-    if (user)
-        res.json(user);
+    if (user) {
+        const response = { success: true, user, message: 'Get user details successful' };
+        res.json(response);
+    }
     else
-        res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ success: false, user: null, message: 'User not found' });
 };
 exports.getUserDetails = getUserDetails;
 const getRecords = (req, res) => {
@@ -125,10 +127,11 @@ const getRecords = (req, res) => {
     const delayMs = parseInt(req.query.delay) || 0;
     const user = users.find(u => u.id === userId);
     if (user) {
-        setTimeout(() => res.json(user.records), delayMs);
+        const response = { success: true, user, message: 'Get user records successful' };
+        setTimeout(() => res.json(response), delayMs);
     }
     else {
-        res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ success: false, user: null, message: 'User not found' });
     }
 };
 exports.getRecords = getRecords;

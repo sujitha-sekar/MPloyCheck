@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRoutingService } from '../../shared/services/http-routing.service';
 import { delay, Observable } from 'rxjs';
-import { User, Record } from '../models/user.model';
+import { User, Record, GetRecordResponse } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class UserService {
     return this.http.getMethod<User>('user-details');
   }
 
-  getRecords(userId: string, delayMs: number = 0): Observable<Record[]> {
-    return this.http.getMethod<Record[]>(`records?id=${userId}&delay=${delayMs}`).pipe(
+  getRecords(userId: string, delayMs: number = 0): Observable<GetRecordResponse> {
+    return this.http.getMethod<GetRecordResponse>(`records?id=${userId}&delay=${delayMs}`).pipe(
       delay(delayMs)
     );
   }

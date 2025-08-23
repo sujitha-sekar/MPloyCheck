@@ -14,6 +14,6 @@ export class RecordsTableComponent {
 records: Record[] = [];
 
   constructor(private userService: UserService) {
-    this.userService.getRecords(history.state.user?.role || 'General User').subscribe(data => this.records = data);
+    // this.userService.getRecords(history.state.user?.role || 'General User').subscribe(data => this.records = data);
   }
 }

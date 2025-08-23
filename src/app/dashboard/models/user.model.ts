@@ -11,3 +11,9 @@ export interface Record {
   title: string;
   status: 'Completed' | 'Pending';
 }
+
+export interface GetRecordResponse {
+  message: string;
+  success: boolean;
+  user: User;
+}

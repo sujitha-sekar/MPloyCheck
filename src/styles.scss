@@ -32,3 +32,21 @@ body {
   height: 100vh;
   background-color: var(--mploy-check-color-background);
 }
+
+.snackbar-success.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: green;
+  --mdc-snackbar-supporting-text-color: rgba(255, 255, 255, 0.87);
+  --mat-snack-bar-button-color: #ff4081;
+}
+
+.snackbar-error.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: red;
+  --mdc-snackbar-supporting-text-color: rgba(255, 255, 255, 0.87);
+  --mat-snack-bar-button-color: #ff4081;
+}
+
+.snackbar-info.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: blue;
+  --mdc-snackbar-supporting-text-color: rgba(255, 255, 255, 0.87);
+  --mat-snack-bar-button-color: #ff4081;
+}

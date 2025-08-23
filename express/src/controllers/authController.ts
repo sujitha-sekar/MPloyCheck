@@ -83,8 +83,11 @@ export const login = (req: Request, res: Response) => {
 export const getUserDetails = (req: Request, res: Response) => {
   const userId = req.query.id as string || 'u101';
   const user = users.find(u => u.id === userId);
-  if (user) res.json(user);
-  else res.status(404).json({ message: 'User not found' });
+   if (user) {
+    const response: LoginResponse = { success: true, user, message: 'Get user details successful' };
+    res.json(response);
+  } 
+  else res.status(404).json({ success: false, user: null, message: 'User not found' });
 };
 
 export const getRecords = (req: Request, res: Response) => {
@@ -92,9 +95,10 @@ export const getRecords = (req: Request, res: Response) => {
   const delayMs = parseInt(req.query.delay as string) || 0;
   const user = users.find(u => u.id === userId);
   if (user) {
-    setTimeout(() => res.json(user.records), delayMs);
+     const response: LoginResponse = { success: true, user, message: 'Get user records successful' };
+    setTimeout(() => res.json(response), delayMs);
   } else {
-    res.status(404).json({ message: 'User not found' });
+    res.status(404).json({success: false, user: null,  message: 'User not found' });
   }
 };
 

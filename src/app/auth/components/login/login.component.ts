@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { QueryList, ViewChildren, ElementRef } from '@angular/core';
 import { LoginInput } from '../../models/login.model';
+import { SnackbarService } from '../../../shared/services/snackbar.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  loginForm!: FormGroup;
   selectedRole: string = 'General User';
   underlineWidth: string = '0px';
   underlineLeft: string = '0px';
@@ -21,14 +23,17 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) {
+    private router: Router,
+    private snackbarService: SnackbarService,
+    private ngxService: NgxUiLoaderService
+  ) {  }
+
+  ngOnInit() {
     this.loginForm = new FormGroup({
       id: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required])
     });
   }
-
   ngAfterViewInit() {
     this.updateUnderline();
     this.tabs.changes.subscribe(() => this.updateUnderline());
@@ -56,6 +61,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.ngxService.start();
     if (this.loginForm.valid) {
       const inputData: LoginInput = {
         id: this.loginForm.value.id || '',
@@ -64,15 +70,21 @@ export class LoginComponent {
       };
       this.authService.login(inputData).subscribe({
         next: (response) => {
-          console.log('login response:', response);
           if (response?.success) {
+            this.ngxService.stop();
+            this.snackbarService.openSnackbar('LogedIn Successfully', 'Success');
             localStorage.setItem('user', JSON.stringify(response.user));
-            this.router.navigate(['/dashboard'], { state: { user: response.user } });
+            this.router.navigate(['/dashboard/user-details'], { state: { user: response.user } });
           } else {
-            alert('Invalid credentials');
+            this.ngxService.stop();
+            // alert('Invalid Credentials');
+            this.snackbarService.openSnackbar('Invalid Credentials', 'Warning');
           }
         },
-        error: () => alert('Login failed')
+        error: () => { 
+          this.ngxService.stop(); 
+          // alert('Login failed'); 
+          this.snackbarService.openSnackbar('Faild to Login', 'Error') }
       });
     }
   }

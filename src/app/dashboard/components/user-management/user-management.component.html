@@ -1,8 +1,31 @@
-<!-- <div>
-      <button (click)="addUser()">Add User</button>
-      <ul>
-        <li *ngFor="let user of users">{{ user.userId }} - {{ user.role }}
-          <button (click)="deleteUser(user.userId)">Delete</button>
-        </li>
-      </ul>
-    </div> -->
+<div>
+  @if(allUsers && allUsers.length) {
+  <div class="card">
+    <h2>User Management</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of allUsers; track user.id) {
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.role }}</td>
+          <td class="actions">
+            <button class="view" (click)="viewUser(user)">View</button>
+            <button class="edit" (click)="editUser(user)">Edit</button>
+            <button class="delete" (click)="deleteUser(user.id)">Delete</button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+</div>
