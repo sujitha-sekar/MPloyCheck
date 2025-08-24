@@ -85,6 +85,7 @@ export class UserManagementComponent {
    * @param data hold the user data.
    */
   viewUser(data: User) {
+    this.ngxService.start();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '550px';
     this.subscriptionObj.add(this.userService.getUserDetails(data.id).subscribe({
@@ -94,8 +95,10 @@ export class UserManagementComponent {
           user: { ...latestUser?.user }
         };
         this.dialog.open(RecordsTableComponent, dialogConfig);
+        this.ngxService.stop();
       },
       error: () => {
+        this.ngxService.stop();
         this.snackbarService.openSnackbar('Failed to load user details', 'Error');
       }
     }));
@@ -105,7 +108,7 @@ export class UserManagementComponent {
    * @param userId hold the user id.
    */
   deleteUser(userId: string) {
-    const dialogRef = this.dialogService.openConfirmationDialog('Are you sure you want to delete this customer', 'custome-dialog');
+    const dialogRef = this.dialogService.openConfirmationDialog('Are you sure you want to delete this user?', 'custome-dialog');
     this.subscriptionObj.add(dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.ngxService.start();
@@ -136,6 +139,7 @@ export class UserManagementComponent {
    * @param user hold the user details.
    */
   editUser(user: User) {
+    this.ngxService.start();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '550px';
     this.subscriptionObj.add(this.userService.getUserDetails(user.id).subscribe({
@@ -145,6 +149,7 @@ export class UserManagementComponent {
             action: 'Edit',
             user: { ...latestUser.user }
           };
+          this.ngxService.stop();
           const dialogRef = this.dialog.open(RecordsTableComponent, dialogConfig);
           dialogRef.afterClosed().subscribe((updatedUser: User) => {
             if (updatedUser) {
@@ -168,11 +173,12 @@ export class UserManagementComponent {
             }
           });
         } else {
+          this.ngxService.stop();
           this.snackbarService.openSnackbar('Failed to load user details for editing', 'Error');
         }
       },
-      error: (err) => {
-        console.error('Error fetching user details for editing:', err);
+      error: () => {
+        this.ngxService.stop();
         this.snackbarService.openSnackbar('Failed to load user details for editing', 'Error');
       }
     }));
