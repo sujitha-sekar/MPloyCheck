@@ -106,5 +106,133 @@
         </record>
       </records>
     </user>
+    <user>
+      <id>user5</id>
+      <name>Rani</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>Rani Record One</title>
+          <status>Pending</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>Rani Record Two</title>
+          <status>Pending</status>
+        </record>
+        <record>
+          <recordId>R003</recordId>
+          <title>Rani Record Three</title>
+          <status>Completed</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>user6</id>
+      <name>Weng</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>Weng Record One</title>
+          <status>Pending</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>Weng Record Two</title>
+          <status>Completed</status>
+        </record>
+        <record>
+          <recordId>R003</recordId>
+          <title>Weng Record Three</title>
+          <status>Pending</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>user7</id>
+      <name>Dan</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>Dan Record One</title>
+          <status>Completed</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>Dan Record Two</title>
+          <status>Completed</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>user8</id>
+      <name>Nick</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>Nick Record One</title>
+          <status>Completed</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>Nick Record Two</title>
+          <status>Pending</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>user9</id>
+      <name>Joy</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>Joy Record One</title>
+          <status>Completed</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>Joy Record Two</title>
+          <status>Pending</status>
+        </record>
+        <record>
+          <recordId>R003</recordId>
+          <title>Joy Record Two</title>
+          <status>Pending</status>
+        </record>
+      </records>
+    </user>
+    <user>
+      <id>user10</id>
+      <name>Xen</name>
+      <password>pass1</password>
+      <role>General User</role>
+      <records>
+        <record>
+          <recordId>R001</recordId>
+          <title>Xen Record One</title>
+          <status>Pending</status>
+        </record>
+        <record>
+          <recordId>R002</recordId>
+          <title>Xen Record Two</title>
+          <status>Pending</status>
+        </record>
+        <record>
+          <recordId>R003</recordId>
+          <title>Xen Record Two</title>
+          <status>Pending</status>
+        </record>
+      </records>
+    </user>
   </users>
 </database>
