@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class HttpRoutingService {
   /**
    * Variable which is used to hold the url for backend connection.
    */
-  private apiUrl = 'http://localhost:3000/api/';
+  private apiUrl = environment.apiUrl;
   /**
    * Constructor which is used to inject the required services.
    * @param http used to access the methods inside it.
